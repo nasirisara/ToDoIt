@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
-using ToDoIt_Assignment.Models;
+using ToDoIt.Models;
 
 
-namespace ToDoIt_Assignment.Tests.Models
+namespace ToDoIt.Tests.Models
 {
     public class ToDoTests
     {

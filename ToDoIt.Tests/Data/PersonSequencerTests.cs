@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
-using ToDoIt_Assignment.Data;
+using ToDoIt.Data;
 
 
-namespace ToDoIt_Assignment.Tests.Data
+namespace ToDoIt.Tests.Data
 {
     public class PersonSequencerTests
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ToDoIt_Assignment.Models
+namespace ToDoIt.Models
 {
     public class Person
 
@@ -22,7 +22,7 @@ namespace ToDoIt_Assignment.Models
 
         public int Id
         {
-            get { return id; }//get/read
+            get  { return id; }//get/read
         }
 
 

@@ -3,9 +3,9 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using ToDoIt_Assignment.Models;
+using ToDoIt.Models;
 
-namespace ToDoIt_Assignment.Models
+namespace ToDoIt.Models
 {
     public class ToDo
     {
