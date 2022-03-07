@@ -8,23 +8,10 @@ namespace ToDoIt.Data
     public class TodoService
     {
         private static ToDo [] toDoArray = new ToDo [0];
-        private readonly int Id;
-        private readonly string firstName;
-        private readonly string  lastName;
-        private readonly string discription;
-        private readonly Person assignee;
-
-
-        public ToDo[] ToDoArray
+       
+        public int Size()
         {
-            get { return toDoArray; }
-            set { toDoArray = value; }
-        }
-
-
-        public int Size(ToDo [] toDoArraysize)
-        {
-            int ArrayLenght = toDoArraysize.Length;
+            int ArrayLenght = toDoArray.Length;
             return ArrayLenght;
         }
         public ToDo [] FindAll()
@@ -47,20 +34,14 @@ namespace ToDoIt.Data
             return null;
 
         }
-        public int PersonId(int Id)
+
+        public ToDo CreatToDo( string discription, Person assignee)
         {
-            return PersonSequencer.NextPersonId(Id);
-        }
+            ToDo nextToDo = new ToDo (TodoSequencer.NextTodoId(), discription , assignee );
 
-        public ToDo[] CreatToDo(ToDo [] increasedToDoArray,int Id, string discription, Person  assignee )
-        {
-
-
-            ToDo nextToDo = new ToDo (PersonId(Id), discription , assignee );
-
-            Array.Resize<ToDo >(ref increasedToDoArray, increasedToDoArray.Length + 1);
-             nextToDo = increasedToDoArray[increasedToDoArray.Length - 1];
-            return increasedToDoArray;
+            Array.Resize<ToDo >(ref toDoArray, toDoArray.Length + 1);
+            toDoArray[toDoArray.Length - 1] = nextToDo;
+            return nextToDo;
         }
 
         public void Clear()
@@ -72,62 +53,56 @@ namespace ToDoIt.Data
         public ToDo[] FindByDoneStatus(bool doneStatus)
         // Returns array with objects that has a matching done status
         {
-
+            List<ToDo> foundToDos = new List<ToDo>();
             
             foreach (ToDo toDo in toDoArray )
             {
                 if (doneStatus == toDo .Done)
                 {
-                    return toDoArray;
+                    foundToDos.Add(toDo);
                 }
              
             }
-            return null;
+            return foundToDos.ToArray();
         }
 
         public ToDo[] FindByAssignee(int personId)
        
-        {
-            //– Returns array with ToDo´s that has an assignee with a matching id.
-            Person assignee = new Person(Id, firstName, lastName);
+        { //– Returns array with ToDo´s that has an assignee with a matching id.
+          
+            List<ToDo> foundToDos = new List<ToDo>();
+
             foreach (ToDo  todo in toDoArray )
             {
 
-                if (personId == assignee.Id)
+                if (personId ==todo.Assignee.Id)
                 {
-                    return toDoArray;
+                    foundToDos.Add (todo );
                 }
             }
-            return null;
+            return foundToDos .ToArray ();
 
         }
 
         public ToDo[] FindByAssignee(Person assignee)
         //Returns array with ToDo´s that has this Person as its assignee. 
         {
-            ToDo toDo = new ToDo(Id, discription, assignee);
-            foreach (ToDo todo in toDoArray)
-            {
-                if (assignee == toDo.Assignee)
-                {
-                    return toDoArray;
-                }
-            }
-            return null;
+            return FindByAssignee(assignee.Id);//DRY
         }
-        public ToDo[] FindUnassignedTodoItems()
+        public ToDo[] FindUnassignedTodoItems(Person assignee)
         // Returns an array of ToDo´s that does not have an assignee set to it.
 
         {
-            
+            List<ToDo> foundToDos = new List<ToDo>();
+
             foreach (ToDo todo in toDoArray)
             {
                 if (assignee != todo.Assignee)
                 {
-                    return toDoArray;
+                    foundToDos.Add(todo );
                 }
             }
-            return null;
+            return foundToDos .ToArray ();
 
         }
 

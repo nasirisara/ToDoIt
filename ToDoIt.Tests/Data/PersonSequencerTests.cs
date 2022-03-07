@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 using ToDoIt.Data;
+using ToDoIt.Models;
 
 
 namespace ToDoIt.Tests.Data
@@ -12,20 +13,23 @@ namespace ToDoIt.Tests.Data
         [Fact]
         public void NextPersonTest()
         {
-            int Id = 1;
+            
 
 
-            Assert.Equal(2, PersonSequencer.NextPersonId(Id));
+            Assert.Equal(1, PersonSequencer.NextPersonId());
 
         }
-        [Fact]
+        [Fact ]
         public void ResetTest()
         {
 
-            int Id = 3;
-            int resetWorks = PersonSequencer.Reset(Id);
+            PersonSequencer.Reset();
+            string firstName = "Sara";
+            string lastName = "Nasiri";
+            Person result = new Person(PersonSequencer.NextPersonId(), firstName, lastName);
+            
 
-            Assert.Equal(0, resetWorks);
+            Assert.Equal(1, result.Id);
 
         }
 

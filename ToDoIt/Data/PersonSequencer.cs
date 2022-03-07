@@ -8,26 +8,18 @@ namespace ToDoIt.Data
     {
         private static int personId;
 
-        public PersonSequencer(int PersonId)
-        {
-            PersonId = personId;
-        }
 
-        public int Id
-        {
-            get { return personId; }//get/read
-        }
-        public static int NextPersonId(int NextPersonId)
+        public static int NextPersonId()
         {
 
-            return ++(NextPersonId);
+            return ++personId;
 
 
         }
-        public static int Reset(int personId)
+        public static void Reset()
         {
             personId = 0;
-            return personId;
+           
 
         }
 

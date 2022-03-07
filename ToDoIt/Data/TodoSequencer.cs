@@ -1,34 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ToDoIt.Models;
 
 namespace ToDoIt.Data
 {
     public class TodoSequencer
     {
         private static int todoId;
-
-        public TodoSequencer(int TodoId)
+ 
+        public static int NextTodoId()
         {
-            TodoId = todoId;
+            return ++todoId;
         }
-
-        public int Id
+        public static void Reset()
         {
-            get { return todoId ; }//get/read
-        }
-        public static int NextTodoId(int NextTodoId)
-        {
-
-            return ++(NextTodoId);
-
-
-        }
-        public static int Reset(int resetTodoId)
-        {
-            resetTodoId = 0;
-            return resetTodoId;
-
+            todoId = 0;
         }
 
 

@@ -3,29 +3,37 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 using ToDoIt.Data;
+using ToDoIt.Models;
 
 
 namespace ToDoIt.Tests.Data
 {
     public class TodoSequencerTests
     {
+      
+       
+
+
         [Fact]
         public void NextTodoIdTest()
         {
-            int Id = 1;
+           
 
 
-            Assert.Equal(2, TodoSequencer.NextTodoId(Id));
+            Assert.Equal(1, TodoSequencer.NextTodoId());
 
         }
         [Fact]
         public void ResetTest()
         {
+            TodoSequencer.Reset();
+            string discription = "Good";
+            string firstName = "Sara";
+            string lastName = "Nasiri";
+            Person assignee = new Person(PersonSequencer.NextPersonId(), firstName, lastName);
+            ToDo todo = new ToDo(TodoSequencer.NextTodoId(), discription, assignee);
 
-            int Id = 3;
-            int resetWorks = TodoSequencer.Reset(Id);
-
-            Assert.Equal(0, resetWorks);
+            Assert.Equal(1, todo.Id );
 
         }
 

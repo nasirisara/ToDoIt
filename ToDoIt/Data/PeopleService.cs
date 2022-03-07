@@ -47,7 +47,7 @@ namespace ToDoIt.Data
         public int PersonId( int Id)
         {
            
-            return PersonSequencer.NextPersonId(Id);
+            return PersonSequencer.NextPersonId();
         }
 
         public  Person[] CreatPerson(Person [] increasedPersonArray,string firstName, string lastName,int Id)

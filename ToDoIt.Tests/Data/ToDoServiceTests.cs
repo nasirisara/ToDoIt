@@ -12,48 +12,53 @@ namespace ToDoIt.Tests.Data
         [Fact]
         public void SizeTest()
         {
-            ToDo[] TodoArray = new ToDo[3];
+            
 
-            TodoService result = new TodoService ();
+            TodoService todoService  = new TodoService ();
+            int result = todoService.Size();
+            ToDo[] resulyArray = todoService.FindAll();
 
-            Assert.Equal(3, result.Size(TodoArray));
+            Assert.Equal(resulyArray .Length ,result );
         }
 
 
         [Fact]
         public void FindByIdTrueTest()
         {
-            int Id = 3;
+
             string firstName = "SARA";
             string lastName = "Nasiri";
             string discription = "Good";
-            Person assignee = new Person(Id, firstName, lastName);
+            Person assignee = new Person(PersonSequencer.NextPersonId(), firstName, lastName);
 
-            ToDo todo = new ToDo(Id, discription, assignee);
-            TodoService result = new TodoService();
+            ToDo todonew = new ToDo(TodoSequencer.NextTodoId(), discription, assignee);
+            TodoService todoService = new TodoService();
+            ToDo[] resulyArray = todoService.FindAll();
 
-            Assert.Equal(todo , result.FindById(3));
+            foreach (ToDo todo in resulyArray)
+            {
+                Assert.Equal(todonew, todoService.FindById(TodoSequencer.NextTodoId()));
+            }
+
         }
 
 
 
 
         [Fact]
-        public void CreatPtodoTest()
+        public void CreattodoTest()
         {
             string firstName = "Fatemeh";
             string lastName = "Sojudi";
-            int Id = 6;
             string discription = "good";
-            Person assignee = new Person(Id, firstName, lastName);
-            ToDo [] todoArray = new ToDo [3];
-
+            Person assignee = new Person(PersonSequencer.NextPersonId(), firstName, lastName);
             TodoService todoService = new TodoService ();
 
+            ToDo result = todoService.CreatToDo ( discription, assignee );
+            ToDo[] resultArray = todoService.FindAll();
 
-            int ActualLenghtofArrayResult =todoService.CreatToDo (todoArray,Id, discription, assignee ).Length;
-            Assert.Equal(todoArray.Length + 1, ActualLenghtofArrayResult);
-
+            Assert.Contains(result, resultArray);
+            Assert.Equal(discription, result.Description);
         }
 
 
@@ -61,11 +66,11 @@ namespace ToDoIt.Tests.Data
 
         public void ClearTest()
         {
-            ToDo [] todoArray = new ToDo [3];
+            
             TodoService todoService = new TodoService();
 
             todoService .Clear();
-            foreach (ToDo todo in todoArray )
+            foreach (ToDo todo in todoService .FindAll () )
             {
                 Assert.Null(todo);
             }
@@ -79,13 +84,13 @@ namespace ToDoIt.Tests.Data
         {
             bool done = false;
             
-            ToDo[] todoArray = new ToDo [3];
+           
             TodoService result = new TodoService();
-
-            Assert.Equal(todoArray, result.FindByDoneStatus(done ));
+            ToDo[] resultArray = result.FindAll();
+            Assert.Equal(resultArray  , result.FindByDoneStatus(done ));
         }
 
-        
+
 
 
         [Fact]
@@ -95,15 +100,13 @@ namespace ToDoIt.Tests.Data
 
             string firstName = "Fatemeh";
             string lastName = "Sojudi";
-            int Id = 6;
 
+            Person assignee = new Person(PersonSequencer.NextPersonId(), firstName, lastName);
             TodoService todoService = new TodoService();
-            Person assignee = new Person(Id ,firstName ,lastName );
-            TodoService result = new TodoService();
-            ToDo[] TOdOArray = new ToDo[0];
 
+            ToDo[] resultArray = todoService.FindAll();
 
-            Assert.Equal(TOdOArray ,result.FindByAssignee(Id));
+            Assert.Equal(resultArray, todoService.FindByAssignee(assignee));
         }
 
 
